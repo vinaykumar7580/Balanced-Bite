@@ -15,89 +15,88 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../../Components/Navbar";
 import load from "./loading.gif";
 import Loading from "../loading";
+import { baseUrl } from "../../Components/baseUrl";
 
 const Card = () => {
-   const [order,setOrder] = useState({})
-   const [id,setId] = useState("")
-   const [x,setx] = useState(false);
-   const [cardData, setCardData] = useState({
-      nameOnCard: "",
-      cardType: "",
-      cardNumber: "",
-      expiryDate: "",
-      cvv: "",
-   });
+  const [order, setOrder] = useState({});
+  const [id, setId] = useState("");
+  const [x, setx] = useState(false);
+  const [cardData, setCardData] = useState({
+    nameOnCard: "",
+    cardType: "",
+    cardNumber: "",
+    expiryDate: "",
+    cvv: "",
+  });
 
-   useEffect(()=>{
-      fetch("https://frail-toad-sunglasses.cyclic.app/order", {
-         method: "GET",
-         headers: {
-           "Content-Type": "application/json",
-           Authorization: `${localStorage.getItem("token")}`,
-         },
-       })
-         .then((res) => res.json())
-         .then((res) => {
-            console.log("order",res)
-           setOrder(res[res.length-1]._id) 
-          
-           
-         })
-         .catch((err) => {
-           console.log(err);
-         });
-   },[])
-   const handleChange = (e) => {
-      const { name, value } = e.target;
-      setCardData((prev) => ({
-         ...prev,
-         [name]: value,
-      }));
-   };
+  useEffect(() => {
+    fetch(`${baseUrl}/order`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `${localStorage.getItem("token")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log("order", res);
+        setOrder(res[res.length - 1]._id);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setCardData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
-   const navigate = useNavigate();
-   const handleSubmit = (e) => {
+  const navigate = useNavigate();
+  const handleSubmit = (e) => {
     e.preventDefault();
     setx(true);
-    fetch(`https://frail-toad-sunglasses.cyclic.app/order/update/${order?._id}`, {
-       method: "PATCH",
-       body: JSON.stringify({card:cardData}),
-       headers: {
-          "Content-Type": "application/json",
-          Authorization: `${localStorage.getItem("token")}`,
-       },
+    fetch(`${baseUrl}/order/update/${order?._id}`, {
+      method: "PATCH",
+      body: JSON.stringify({ card: cardData }),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `${localStorage.getItem("token")}`,
+      },
     })
-       .then((res) => res.json())
-       .then((res) => {
-          console.log("order in line 71", res);
-       })
-       .catch((err) => {
-          console.log(err);
-       });
+      .then((res) => res.json())
+      .then((res) => {
+        console.log("order in line 71", res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
     // console.log(cardData);
     setTimeout(() => {
-       navigate("/payment/complete");
-       setx(false);
+      navigate("/payment/complete");
+      setx(false);
     }, 3000);
- };
+  };
 
-   const handleCancel = (e) => {
-    fetch(`https://frail-toad-sunglasses.cyclic.app/order/deleteallorder`, {
-       method: "DELETE",
+  const handleCancel = (e) => {
+    fetch(`${baseUrl}/order/deleteallorder`, {
+      method: "DELETE",
 
-       headers: {
-          //   "Content-Type": "application/json",
-          Authorization: `${localStorage.getItem("token")}`,
-       },
+      headers: {
+        //   "Content-Type": "application/json",
+        Authorization: `${localStorage.getItem("token")}`,
+      },
     })
-       .then((res) => res.json())
-       .then((res) => {
-          console.log("order", res);
-       })
-       .catch((err) => {
-          console.log(err.message);
-       });
+      .then((res) => res.json())
+      .then((res) => {
+        console.log("order", res);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
     alert("Your Order Canceled");
     navigate("/");
     setCardData({
@@ -107,7 +106,7 @@ const Card = () => {
       expiryDate: "",
       cvv: "",
     });
- };
+  };
 
   return (
     <Box
@@ -130,7 +129,7 @@ const Card = () => {
       {x ? (
         <Box p={"10% 40%"} m={"auto"} textAlign={"center"}>
           {/* <img src={load} alt="Gif is running" backgroundColor="none" /> */}
-        <Loading/>
+          <Loading />
         </Box>
       ) : (
         <Box>

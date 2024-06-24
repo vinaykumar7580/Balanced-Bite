@@ -34,7 +34,6 @@
 //     //     getdata()
 //     // },[])
 
-
 //   return (
 //     <Chart
 //     chartEvents={[

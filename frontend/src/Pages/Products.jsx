@@ -21,14 +21,14 @@ function Products() {
 
   return (
     <Box>
-      <Navbar/>
+      <Navbar />
       <br />
       <Box>
         <Heading
           marginTop={"80px"}
           color={"#002C9B"}
           fontWeight={"bold"}
-          fontSize={["30px","40px","45px","52px"]}
+          fontSize={["30px", "40px", "45px", "52px"]}
           fontFamily={"serif"}
           font
         >
@@ -46,7 +46,6 @@ function Products() {
                     fontSize={["14px", "16px", "22px", "18px"]}
                     fontWeight={"bold"}
                     fontFamily={"sans-serif"}
-                    
                   >
                     2 SERVING Signature
                   </Tab>
@@ -56,7 +55,6 @@ function Products() {
                     fontSize={["14px", "16px", "22px", "18px"]}
                     fontWeight={"bold"}
                     fontFamily={"sans-serif"}
-                    
                   >
                     2 SERVING Vegetarian
                   </Tab>
@@ -66,7 +64,6 @@ function Products() {
                     fontSize={["14px", "16px", "22px", "18px"]}
                     fontWeight={"bold"}
                     fontFamily={"sans-serif"}
-                    
                   >
                     2 SERVING Wellness
                   </Tab>
@@ -76,7 +73,6 @@ function Products() {
                     fontSize={["14px", "16px", "22px", "18px"]}
                     fontWeight={"bold"}
                     fontFamily={"sans-serif"}
-                    
                   >
                     4 SERVING Signature
                   </Tab>
@@ -86,7 +82,6 @@ function Products() {
                     fontSize={["14px", "16px", "22px", "18px"]}
                     fontWeight={"bold"}
                     fontFamily={"sans-serif"}
-                    
                   >
                     WEEKLY OPTIONS
                   </Tab>
@@ -148,7 +143,7 @@ function Products() {
       </Box>
       <br />
       <br />
-      <Footer/>
+      <Footer />
     </Box>
   );
 }

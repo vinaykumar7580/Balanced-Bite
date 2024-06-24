@@ -15,12 +15,11 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../../Components/Navbar";
 import load from "./loading.gif";
 import Loading from "../loading";
+import { baseUrl } from "../../Components/baseUrl";
 
 const PersonalDetails = () => {
-
-   const [order, setOrder] = useState({});
-   const [id, setId] = useState("");
-
+  const [order, setOrder] = useState({});
+  const [id, setId] = useState("");
 
   const [detail, setDetail] = useState({
     name: "",
@@ -42,95 +41,90 @@ const PersonalDetails = () => {
   const [x, setx] = useState(false);
   const navigate = useNavigate();
 
-useEffect(()=>{
-   fetch('https://frail-toad-sunglasses.cyclic.app/order',{
-      method:"GET",
+  useEffect(() => {
+    fetch(`${baseUrl}/order`, {
+      method: "GET",
       headers: {
-         "Content-Type": "application/json",
-         Authorization: `${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+        Authorization: `${localStorage.getItem("token")}`,
       },
-   })
-   .then((res)=>res.json())
-   .then((res)=>setOrder(res[res.length-1])
-   )
-   .catch((err)=>console.log(err))
-},[])
+    })
+      .then((res) => res.json())
+      .then((res) => setOrder(res[res.length - 1]))
+      .catch((err) => console.log(err));
+  }, []);
 
-console.log("order in line 58",order,order._id)
+  console.log("order in line 58", order, order._id);
 
-
-
-   const handleSubmit = (e) => {
-      e.preventDefault();
-      setx(true);
-      fetch(`https://frail-toad-sunglasses.cyclic.app/order/update/${order?._id}`, {
-         method: "PATCH",
-         body: JSON.stringify({address:detail}),
-         headers: {
-            "Content-Type": "application/json",
-            Authorization: `${localStorage.getItem("token")}`,
-         },
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setx(true);
+    fetch(`${baseUrl}/order/update/${order?._id}`, {
+      method: "PATCH",
+      body: JSON.stringify({ address: detail }),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `${localStorage.getItem("token")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log("order in line 75", res);
       })
-         .then((res) => res.json())
-         .then((res) => {
-            console.log("order in line 75", res);
-         })
-         .catch((err) => {
-            console.log(err);
-         });
-
-      console.log(detail);
-      setTimeout(() => {
-         navigate("/payment/card");
-         setx(false);
-      }, 3000);
-   };
-
-   const handleCancel = (e) => {
-      fetch(`https://frail-toad-sunglasses.cyclic.app/order/deleteallorder`, {
-         method: "DELETE",
-
-         headers: {
-            //   "Content-Type": "application/json",
-            Authorization: `${localStorage.getItem("token")}`,
-         },
-      })
-         .then((res) => res.json())
-         .then((res) => {
-            console.log("order", res);
-         })
-         .catch((err) => {
-            console.log(err.message);
-         });
-      alert("Your Order Canceled");
-      navigate("/");
-      setDetail({
-         name: "",
-         email: "",
-         address: "",
-         city: "",
-         nation: "",
-         contact: "",
-         state: "",
+      .catch((err) => {
+        console.log(err);
       });
-   };
 
+    console.log(detail);
+    setTimeout(() => {
+      navigate("/payment/card");
+      setx(false);
+    }, 3000);
+  };
+
+  const handleCancel = (e) => {
+    fetch(`${baseUrl}/order/deleteallorder`, {
+      method: "DELETE",
+
+      headers: {
+        //   "Content-Type": "application/json",
+        Authorization: `${localStorage.getItem("token")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log("order", res);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+    alert("Your Order Canceled");
+    navigate("/");
+    setDetail({
+      name: "",
+      email: "",
+      address: "",
+      city: "",
+      nation: "",
+      contact: "",
+      state: "",
+    });
+  };
 
   return (
-    <Box backgroundColor={"#0f346c"}
-    
-    margin={"auto"}
-    //display={"flex"}
-    //justifyContent={"center"}
-    //alignItems={"center"}
-    //border={"5px solid red"}
+    <Box
+      backgroundColor={"#0f346c"}
+      margin={"auto"}
+      //display={"flex"}
+      //justifyContent={"center"}
+      //alignItems={"center"}
+      //border={"5px solid red"}
     >
-      
       <Navbar />
       {x ? (
         <Box p={"10% 40%"} m={"auto"} textAlign={"center"}>
           {/* <img src={load} alt="Gif is running" backgroundColor="none" /> */}
-       <Loading/>
+          <Loading />
         </Box>
       ) : (
         <Box>
@@ -153,15 +147,12 @@ console.log("order in line 58",order,order._id)
             padding={["8px", "10px", "20px", "50px"]}
             marginBottom={"50px"}
           >
-
- 
             <Box
             // maxWidth="800px"
             // mx="auto"
             // px={["1rem", "2rem", "9rem"]}
             // py={["20%", 15, 20, "5%"]}
             >
-
               <Heading
                 fontFamily={"heading"}
                 color={"#002C9B"}
@@ -184,21 +175,18 @@ console.log("order in line 58",order,order._id)
                   />
                 </FormControl>
 
-              
-
-                  <FormControl>
-                     <FormLabel>Email Address</FormLabel>
-                     <Input
-                        type="text"
-                        required
-                        backgroundColor={"#c1d6f3"}
-                        value={detail.email}
-                        name="email"
-                        placeholder="User's email"
-                        onChange={handleChange}
-                     />
-                  </FormControl>
-
+                <FormControl>
+                  <FormLabel>Email Address</FormLabel>
+                  <Input
+                    type="text"
+                    required
+                    backgroundColor={"#c1d6f3"}
+                    value={detail.email}
+                    name="email"
+                    placeholder="User's email"
+                    onChange={handleChange}
+                  />
+                </FormControl>
 
                 <FormControl>
                   <FormLabel>Address</FormLabel>

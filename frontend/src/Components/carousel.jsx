@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Box,
   IconButton,
@@ -7,11 +7,11 @@ import {
   Heading,
   Text,
   Container,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 // Here we have used react-icons package for the icons
-import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi';
+import { BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi";
 // And react-slick as our Carousel Lib
-import Slider from 'react-slick';
+import Slider from "react-slick";
 
 // Settings for the slider
 const settings = {
@@ -33,45 +33,40 @@ export default function Carousel() {
 
   // These are the breakpoints which changes the position of the
   // buttons as the screen size changes
-  const top = useBreakpointValue({ base: '90%', md: '70%' });
-  const side = useBreakpointValue({ base: '30%', md: '40px' });
+  const top = useBreakpointValue({ base: "90%", md: "70%" });
+  const side = useBreakpointValue({ base: "30%", md: "40px" });
 
   // This list contains all the data for carousels
   // This can be static or loaded from a server
   const cards = [
     {
-      title: 'Balanced Bite',
-      text:
-        "We the team of ‘Balanced Bite’ not only believe in development, but we also believe in humanity, trust, and honesty. With our honest and pure souls, we always tried to provide the best quality and healthy meals to the customers.",
+      title: "Balanced Bite",
+      text: "We the team of ‘Balanced Bite’ not only believe in development, but we also believe in humanity, trust, and honesty. With our honest and pure souls, we always tried to provide the best quality and healthy meals to the customers.",
       image:
-        'https://images.unsplash.com/photo-1507237998874-b4d52d1dd655?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=900&q=60',
+        "https://images.unsplash.com/photo-1507237998874-b4d52d1dd655?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=900&q=60",
     },
     {
-        title: 'End to End Security',
-        text:
-          "A good hash function for security purposes must be a unidirectional process that uses a one-way hashing algorithm.",
-      
+      title: "End to End Security",
+      text: "A good hash function for security purposes must be a unidirectional process that uses a one-way hashing algorithm.",
+
       image:
         "https://static.vecteezy.com/system/resources/previews/001/330/299/original/cyber-technology-security-network-protection-background-free-vector.jpg",
     },
     {
-        title: '',
-        text:
-          "",
-      image:
-        'https://www.cmarix.com/blog/wp-content/uploads/2019/09/Mern.jpg',
+      title: "",
+      text: "",
+      image: "https://www.cmarix.com/blog/wp-content/uploads/2019/09/Mern.jpg",
     },
-    
   ];
 
   return (
     <Box
-      position={'relative'}
-      height={'350px'}
-      width={'full'}
-      boxShadow='rgba(0, 0, 0, 0.16) 0px 1px 4px'
+      position={"relative"}
+      height={"350px"}
+      width={"full"}
+      boxShadow="rgba(0, 0, 0, 0.16) 0px 1px 4px"
       // border={'2px solid red'}
-      >
+    >
       {/* CSS files for react-slick */}
       <link
         rel="stylesheet"
@@ -91,9 +86,10 @@ export default function Carousel() {
         position="absolute"
         left={side}
         top={top}
-        transform={'translate(0%, -50%)'}
+        transform={"translate(0%, -50%)"}
         // zIndex={2}
-        onClick={() => slider?.slickPrev()}>
+        onClick={() => slider?.slickPrev()}
+      >
         <BiLeftArrowAlt size="40px" />
       </IconButton>
       {/* Right Icon */}
@@ -103,9 +99,10 @@ export default function Carousel() {
         position="absolute"
         right={side}
         top={top}
-        transform={'translate(0%, -50%)'}
+        transform={"translate(0%, -50%)"}
         // zIndex={2}
-        onClick={() => slider?.slickNext()}>
+        onClick={() => slider?.slickNext()}
+      >
         <BiRightArrowAlt size="40px" />
       </IconButton>
       {/* Slider */}
@@ -120,24 +117,23 @@ export default function Carousel() {
             backgroundRepeat="no-repeat"
             backgroundSize="cover"
             // border={'2px solid red'}
-            >
+          >
             {/* This is the block you need to change, to customize the caption */}
             <Container size="container.lg" height="350px" position="relative">
               <Stack
                 spacing={6}
-                w={'full'}
-                maxW={'lg'}
+                w={"full"}
+                maxW={"lg"}
                 position="absolute"
                 top="43%"
-                left={'-48%'}
-                textAlign={'left'}
-                transform="translate(0, -50%)">
-                <Heading  fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}>
+                left={"-48%"}
+                textAlign={"left"}
+                transform="translate(0, -50%)"
+              >
+                <Heading fontSize={{ base: "3xl", md: "4xl", lg: "5xl" }}>
                   {card.title}
                 </Heading>
-                <Text fontSize={{ base: 'md', lg: 'lg' }} >
-                  {card.text}
-                </Text>
+                <Text fontSize={{ base: "md", lg: "lg" }}>{card.text}</Text>
               </Stack>
             </Container>
           </Box>

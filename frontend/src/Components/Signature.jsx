@@ -1,41 +1,43 @@
 import { Box, Flex, Heading, Image, SimpleGrid } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductError, getProductSuccess } from "../Redux/ProductReducer/action";
+import {
+  getProductError,
+  getProductSuccess,
+} from "../Redux/ProductReducer/action";
 import { useEffect } from "react";
-import { FcClock} from "react-icons/fc";
-
+import { FcClock } from "react-icons/fc";
+import { baseUrl } from "./baseUrl";
 
 function Signature() {
-
-  let navigate=useNavigate()
+  let navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { isLoading, isError, product } = useSelector(
     (store) => store.ProductReducer
   );
 
-  console.log("prod",product)
+  console.log("prod", product);
 
-  const getData=()=>{
-    fetch("https://frail-toad-sunglasses.cyclic.app/product/signature",{
-      method:"GET",
-      headers:{
-        "Content-Type":"application/json"
-      }
+  const getData = () => {
+    fetch(`${baseUrl}/product/signature`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
     })
-    .then((res)=>res.json())
-    .then((res)=>{
-      dispatch(getProductSuccess(res));
-    })
-    .catch((err)=>{
-      dispatch(getProductError());
-    })
-  }
+      .then((res) => res.json())
+      .then((res) => {
+        dispatch(getProductSuccess(res));
+      })
+      .catch((err) => {
+        dispatch(getProductError());
+      });
+  };
 
-  useEffect(()=>{
-    getData()
-  },[])
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <Box>
@@ -48,7 +50,7 @@ function Signature() {
                 boxShadow="rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px"
                 borderRadius={"5px"}
                 cursor={"pointer"}
-                onClick={()=>navigate(`/products/${el._id}`)}
+                onClick={() => navigate(`/products/${el._id}`)}
               >
                 <Image
                   // borderTopLeftRadius={"5px"}
@@ -61,22 +63,26 @@ function Signature() {
                   paddingLeft={"20px"}
                   paddingRight={"20px"}
                 >
-                  <Heading size={"md"} noOfLines={1}>{el.name}</Heading>
-                  <Box marginTop={"10px"} noOfLines={1}>{el.title}</Box>
+                  <Heading size={"md"} noOfLines={1}>
+                    {el.name}
+                  </Heading>
+                  <Box marginTop={"10px"} noOfLines={1}>
+                    {el.title}
+                  </Box>
                   <Box
-                    bgColor={el.time%2 == 0? "#1EB389" : "#002C9B"}
+                    bgColor={el.time % 2 == 0 ? "#1EB389" : "#002C9B"}
                     color={"#FFFFFF"}
                     marginTop={"10px"}
                     padding={"5px"}
                     textAlign={"center"}
                     fontWeight={"bold"}
                   >
-                    {el.time%2==0? "PREMIUM":"READY TO COOK"}
+                    {el.time % 2 == 0 ? "PREMIUM" : "READY TO COOK"}
                   </Box>
                   <br />
                   <Flex alignItems={"center"} gap={2}>
-                    <Heading size={"md"}>{<FcClock/>}</Heading>
-                     <Heading size={"sm"}>{el.time} MIN</Heading>
+                    <Heading size={"md"}>{<FcClock />}</Heading>
+                    <Heading size={"sm"}>{el.time} MIN</Heading>
                   </Flex>
                 </Box>
               </Box>
